@@ -3,7 +3,7 @@ package com.bvengo.soundcontroller.gui.buttons;
 import com.bvengo.soundcontroller.SoundController;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.CommonComponents;
@@ -29,20 +29,20 @@ public class HoverableButtonWidget extends Button {
 
         this.buttonId = buttonId;
 
-        ON_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_on");
-        OFF_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_off");
-        ON_HOVER_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_on_hovered");
-        OFF_HOVER_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_off_hovered");
+        this.ON_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_on");
+        this.OFF_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_off");
+        this.ON_HOVER_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_on_hovered");
+        this.OFF_HOVER_TEXTURE = Identifier.fromNamespaceAndPath(SoundController.MOD_ID, buttonId + "_button_off_hovered");
     }
 
     protected Identifier getTextureIdentifier() {
-        return isPressed ? (isHovered ? ON_HOVER_TEXTURE : ON_TEXTURE)
-                : (isHovered ? OFF_HOVER_TEXTURE : OFF_TEXTURE);
+        return this.isPressed ? (this.isHovered ? this.ON_HOVER_TEXTURE : this.ON_TEXTURE)
+                : (this.isHovered ? this.OFF_HOVER_TEXTURE : this.OFF_TEXTURE);
     }
 
     @Override
-    public void renderContents(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        Identifier texture = getTextureIdentifier();
-        context.blitSprite(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), width, height);
+    public void extractContents(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        Identifier texture = this.getTextureIdentifier();
+        context.blitSprite(RenderPipelines.GUI_TEXTURED, texture, this.getX(), this.getY(), this.width, this.height);
     }
 }

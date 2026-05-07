@@ -7,7 +7,7 @@ import com.bvengo.soundcontroller.gui.buttons.TriggerButtonWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList.Entry;
 import net.minecraft.client.gui.components.ResettableOptionWidget;
@@ -134,10 +134,10 @@ public class VolumeWidgetEntry extends Entry<VolumeWidgetEntry> {
     }
 
     @Override
-    public void renderContent(GuiGraphics context, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-        this.volumeSlider.render(context, mouseX, mouseY, tickDelta);
-        this.playSoundButton.render(context, mouseX, mouseY, tickDelta);
-        this.resetButton.render(context, mouseX, mouseY, tickDelta);
+    public void extractContent(GuiGraphicsExtractor context, int mouseX, int mouseY, boolean hovered, float tickDelta) {
+        this.volumeSlider.extractRenderState(context, mouseX, mouseY, tickDelta);
+        this.playSoundButton.extractRenderState(context, mouseX, mouseY, tickDelta);
+        this.resetButton.extractRenderState(context, mouseX, mouseY, tickDelta);
     }
 
     @Override
